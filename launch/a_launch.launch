@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node name= "user" pkg= "a_assignment3" type= "controller.py"  output= "screen"  />
+    <node name= "case_1" pkg= "a_assignment3" type= "case_1.py"  output="screen"  />
+    <node name= "input_key" pkg= "a_assignment3" type= "case_2.py"  output="screen" />
+
+</launch>
