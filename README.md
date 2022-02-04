@@ -1,72 +1,56 @@
 # Final_assignment
 
-ROS assignment
-================================
 
-This is the second assignment of the Research Track 1 course. 
-It's a C++ code to move a robot in the environment (a reproduction of the Monza's circuit) and allows the user to increase or decrease the velocity of the robot, according to the given input, or even   reset its position by calling a built in service 'reset_position'.
-
+This is the third assignment of the Research Track 1 course. 
+The target of the project is to drive a robot in a 3D map, thanks to a Python code.
+Furthermore the user can control the robot, choosing one of the following choices:
+1. provide the robot with coordinates x and y that it reaches automatically 
+2. drive the robot by the keyboard
+3. drive the robot by the keyboard avoiding obstacles
+ 
 
 Installing and running
 ----------------------
-First of all is necessary to execute the `roscore & ` command in one shell.
 
-You have to download the repository from http://CarmineD8/second_assignment (github.com) and created your environment.
+You have to download the repository from https://github.com/CarmineD8/final_assignment.git (github.com) and https://github.com/CarmineD8/slam_gmapping.git (github.com).
 
-To run the simulation use:
-
-```bash
-$ rosrun stage_ros stageros $(rospack find second_assignment)/world/my_world.world
-```
-
-To run the controller node (in a second terminal) use:
+After downloading and building the environment, make the ' .py ' file executable with the command:
 
 ```bash
-$  rosrun assignment_2 controller_node
+$ chmod +x <name_of_the_script>.py
 ```
 
-To run the client node (in a third terminal) use:
+To run the simulation use the following command in three different terminal:
 
 ```bash
-$  rosrun my_srv client
+$ roslaunch final_assignment simulation_gmapping.launch
 ```
 
-Now you can see the robot starts to move in the cicuit.
+```bash
+$  roslaunch final_assignment move_base.launch
+```
 
-Code
+```bash
+$  roslaunch a_assignment3 a_launch.launch
+```
+
+Now you can see the robot starts to move in the environment.
+
+
+Structer of the code
 ---------
+The logic behind the code is shown in the attached flowchart. 
 
-In this code there are three nodes communicating between them: the controller_node contained in ' controller.cpp ', the stage_ros node contained in 'my_world.world' and the client node contained in the 'client.cpp'. 
+So you have the script ' a_launch.launch 'which contain ' controller.py ', where you can find the functions to manage each user choice, and ' case_2.py '.
 
-### Controller ###
+There are 4 type of choices:
 
-The controller node is the the most important part of the code. It allows to increase or decrease the velocity of the robot thank's to this function:
+1. if the user select the first choice, he must enter X and Y coordinates with which the robot can move towards a defined position; moreover the code is able to show a message which inform the user if the target is achieved or not
 
-```bash
-bool drive (my_srv::Velocity::Request &req, my_srv::Velocity::Response &res)
-```
-This function contains the input:
+2. if the user select the second choice, the code called the function ' teleop_twist_keyboard ' which is the main responsible of the robot's moves
 
-```python
-if (req.v == "i" ){
-		// increase the speed
-		res.x = vel + 0.1*vel;		
-	}
-	else if (req.v == "d" ){
-		// decrease the speed
-		res.x = vel - 0.1*vel;
-	}
-	if (res.x > 1.4 || res.x < 0.3){
-		// set speed limits 
-		res.x = 1.0;
-	}
-	vel=res.x;
-	return res.x;
-```
-Where the last condition sets the speed limit to the robot to prevent that, the high speed value, get him into the wall.
+3. if the user select the third choice, the code called the function ' teleop_twist_keyboard ' which is the main responsible of the robot's moves, plus the collision handler which allow to the robot to avoid obstacles and proceed along the path smoothly
 
-Then there is a function which check the obstacles and let the robot move within the circuit:
+4. in the last choice, the user simply close the whole program.
 
-```bash
-void laserCallback(const sensor_msgs::LaserScan::ConstPtr& msg)
-```
+
