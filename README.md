@@ -39,6 +39,7 @@ Now you can see the robot starts to move in the environment.
 
 Structer of the code
 ---------
+
 The logic behind the code is shown in the attached flowchart. 
 
 So you have the script ' a_launch.launch ' which contain ' controller.py ', where you can find the functions to manage each user choice, and ' case_2.py '.
@@ -52,5 +53,24 @@ There are 4 type of choices:
 3. if the user select the third choice, the code called the function ' teleop_twist_keyboard ' which is the main responsible of the robot's moves, plus the collision handler which allow to the robot to avoid obstacles and proceed along the path smoothly
 
 4. in the last choice, the user simply close the whole program.
+
+
+Something about the simulator
+---------
+
+This assignment relies on some software facilities, like:
+
+1. Gazebo, which is an open-source 3D robotic simulator integrated into ROS that has the ability to accurately simulate robots in indoor and outdoor environments. In particular, in this case, the robot surfs in a group of rooms delimited by walls. For controlling the robot I need some topics like ' /scan ' (topic on which the simulation node publishes the output of the robot laser scanners) and ' /cmd_vel ' (topic to which the simulation node is subscribed in order to receive commands to set the robot linear and angular velocity).  
+
+2. Rviz, which is a 3D viewer and It interacts with Gazebo
+
+3. slam_gmapping (node), which is the node that implements a simultaneous localization and mapping (SLAM) algorithm
+
+4. teleop_twist_keyboard (node), which is a GUI (Graphic User Interface) that allows the user to drive a robot by the keyboard.
+
+
+
+
+
 
 
