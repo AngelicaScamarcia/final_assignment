@@ -41,7 +41,7 @@ Structer of the code
 ---------
 The logic behind the code is shown in the attached flowchart. 
 
-So you have the script ' a_launch.launch 'which contain ' controller.py ', where you can find the functions to manage each user choice, and ' case_2.py '.
+So you have the script ' a_launch.launch ' which contain ' controller.py ', where you can find the functions to manage each user choice, and ' case_2.py '.
 
 There are 4 type of choices:
 
