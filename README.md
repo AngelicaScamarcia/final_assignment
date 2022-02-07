@@ -27,11 +27,11 @@ $ roslaunch final_assignment simulation_gmapping.launch
 ```
 
 ```bash
-$  roslaunch final_assignment move_base.launch
+$ roslaunch final_assignment move_base.launch
 ```
 
 ```bash
-$  roslaunch a_assignment3 a_launch.launch
+$ roslaunch a_assignment3 a_launch.launch
 ```
 
 Now you can see the robot starts to move in the environment.
